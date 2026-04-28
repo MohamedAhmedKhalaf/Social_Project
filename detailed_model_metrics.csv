@@ -1,0 +1,19 @@
+Scheme,Representation,Model,Accuracy,Precision,Recall,F1_Score
+Clean Basic,Lexical,SentiWordNet,0.6074,0.6117,0.6074,0.5659
+Clean Basic,Lexical,Bing Liu Custom,0.7785,0.7985,0.7785,0.7736
+Clean Basic,Bag-Of-Words,Naive Bayes,0.6833,0.6914,0.6833,0.6794
+Clean Basic,Bag-Of-Words,Decision Tree,0.5667,0.6076,0.5667,0.5824
+Clean Basic,GloVe 100d,Naive Bayes,0.4667,0.5585,0.4667,0.4781
+Clean Basic,GloVe 100d,Decision Tree,0.4833,0.5258,0.4833,0.4933
+Lemmatized,Lexical,SentiWordNet,0.6242,0.6182,0.6242,0.587
+Lemmatized,Lexical,Bing Liu Custom,0.7852,0.8014,0.7852,0.7806
+Lemmatized,Bag-Of-Words,Naive Bayes,0.6833,0.6871,0.6833,0.6702
+Lemmatized,Bag-Of-Words,Decision Tree,0.6333,0.6579,0.6333,0.6367
+Lemmatized,GloVe 100d,Naive Bayes,0.4333,0.5112,0.4333,0.4434
+Lemmatized,GloVe 100d,Decision Tree,0.4667,0.5355,0.4667,0.4946
+Refined Full,Lexical,SentiWordNet,0.6074,0.6117,0.6074,0.5659
+Refined Full,Lexical,Bing Liu Custom,0.7785,0.7985,0.7785,0.7736
+Refined Full,Bag-Of-Words,Naive Bayes,0.6833,0.6914,0.6833,0.6794
+Refined Full,Bag-Of-Words,Decision Tree,0.5667,0.6076,0.5667,0.5824
+Refined Full,GloVe 100d,Naive Bayes,0.4667,0.5585,0.4667,0.4781
+Refined Full,GloVe 100d,Decision Tree,0.4833,0.5258,0.4833,0.4933

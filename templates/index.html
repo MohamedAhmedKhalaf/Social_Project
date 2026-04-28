@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BankFive AI Sentiment Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Stunning Modern Gradient Background */
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+        }
+        .glass-container {
+            /* Glassmorphism Effect */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 450px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+        }
+        h2 { margin-bottom: 10px; font-weight: 600; letter-spacing: 1px; }
+        p { font-size: 14px; color: #ccc; margin-bottom: 25px; }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 15px;
+            resize: none;
+            outline: none;
+            margin-bottom: 20px;
+        }
+        textarea::placeholder { color: #aaa; }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #00d2ff;
+            background: linear-gradient(to right, #3a7bd5, #00d2ff);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); }
+        #result { margin-top: 25px; display: none; }
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .positive { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+        .negative { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+        .neutral { background: rgba(149, 165, 166, 0.2); color: #95a5a6; border: 1px solid #95a5a6; }
+        .confidence { font-size: 13px; color: #bbb; }
+        
+        /* Spinner */
+        .loader { display: none; border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #00d2ff; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="glass-container">
+        <h2>BankFive AI</h2>
+        <p>Advanced Sentiment Analysis System</p>
+        
+        <textarea id="inputText" placeholder="Type a customer review here... e.g. 'The teller was incredibly helpful today!'"></textarea>
+        
+        <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+
+        <div class="loader" id="loader"></div>
+        
+        <div id="result">
+            <div id="sentimentBadge" class="badge"></div>
+            <div class="confidence" id="confidenceText"></div>
+        </div>
+    </div>
+
+    <script>
+        async function analyzeSentiment() {
+            const text = document.getElementById("inputText").value;
+            if(!text) return alert("Please enter some text!");
+
+            // UI adjustments
+            document.getElementById("result").style.display = "none";
+            document.getElementById("loader").style.display = "block";
+
+            try {
+                // Call the FastAPI Backend
+                const response = await fetch("http://127.0.0.1:8000/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text: text })
+                });
+                
+                const data = await response.json();
+                
+                // Stop loader
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("result").style.display = "block";
+                
+                // Update Badge
+                const badge = document.getElementById("sentimentBadge");
+                badge.className = `badge ${data.sentiment}`;
+                badge.innerText = data.sentiment;
+
+                // Update Confidence
+                const confPercent = (data.confidence * 100).toFixed(1);
+                document.getElementById("confidenceText").innerText = `AI Confidence: ${confPercent}%`;
+
+            } catch (error) {
+                document.getElementById("loader").style.display = "none";
+                alert("Error connecting to the API. Make sure FastAPI is running!");
+            }
+        }
+    </script>
+</body>
+</html>

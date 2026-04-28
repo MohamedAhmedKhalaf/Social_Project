@@ -1,0 +1,19 @@
+Preprocessing_Scheme,Representation,Model,Accuracy
+Clean Basic,Lexical Rules (No Embeddings),SentiWordNet,0.8714
+Clean Basic,Lexical Rules (No Embeddings),Bing Liu Custom,0.8214
+Clean Basic,Bag-Of-Words,Naive Bayes,0.8929
+Clean Basic,Bag-Of-Words,Decision Tree,0.8571
+Clean Basic,GloVe 100d,Naive Bayes,0.7143
+Clean Basic,GloVe 100d,Decision Tree,0.9286
+Lemmatized,Lexical Rules (No Embeddings),SentiWordNet,0.8357
+Lemmatized,Lexical Rules (No Embeddings),Bing Liu Custom,0.8357
+Lemmatized,Bag-Of-Words,Naive Bayes,0.8929
+Lemmatized,Bag-Of-Words,Decision Tree,0.8571
+Lemmatized,GloVe 100d,Naive Bayes,0.75
+Lemmatized,GloVe 100d,Decision Tree,0.8571
+Refined Full,Lexical Rules (No Embeddings),SentiWordNet,0.8429
+Refined Full,Lexical Rules (No Embeddings),Bing Liu Custom,0.8929
+Refined Full,Bag-Of-Words,Naive Bayes,0.8929
+Refined Full,Bag-Of-Words,Decision Tree,0.8571
+Refined Full,GloVe 100d,Naive Bayes,0.7143
+Refined Full,GloVe 100d,Decision Tree,0.7857
